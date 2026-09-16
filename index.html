@@ -183,14 +183,33 @@ kbd{font-size:12.5px;background:var(--panel-2);border:1px solid var(--line);bord
 .faq details[open] summary::after{transform:rotate(-135deg)}
 .faq .a{padding:0 18px 16px 50px;color:var(--ink-soft);font-size:14.5px}
 
-/* video slots */
-.vids{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+/* video players */
+.vids{display:grid;grid-template-columns:1fr;gap:16px;align-items:start}
+@media(min-width:720px){.vids{grid-template-columns:minmax(0,1.9fr) minmax(0,1fr)}}
 .vid{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
-.vid .thumb{aspect-ratio:16/9;background:linear-gradient(135deg,var(--teal-wash),var(--panel-2));
-  display:grid;place-items:center;color:var(--teal-deep);border-bottom:1px solid var(--line)}
-.vid .thumb svg{width:44px;height:44px;opacity:.85}
-.vid .vcap{padding:12px 14px;font-size:14px;font-weight:600}
-.vid .vcap small{display:block;font-weight:400;color:var(--ink-soft);font-size:12.5px;margin-top:2px}
+.vid .frame{position:relative;width:100%;background:var(--screen)}
+.vid .frame.wide{aspect-ratio:16/9}
+.vid .frame.tall{aspect-ratio:9/16;max-height:520px;margin:0 auto}
+.vid .frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vid .vcap{padding:12px 14px 13px;font-size:14.5px;font-weight:600;display:flex;gap:10px;align-items:flex-start}
+.vid .vcap .yt{flex:none;width:22px;height:22px;border-radius:6px;background:#ff0033;display:grid;place-items:center;margin-top:1px}
+.vid .vcap .yt::after{content:"";border-left:8px solid #fff;border-top:5px solid transparent;border-bottom:5px solid transparent;margin-left:2px}
+.vid .vcap small{display:block;font-weight:400;color:var(--ink-soft);font-size:13px;margin-top:2px}
+.vid .vcap a{color:inherit;text-decoration:none}
+.vid .vcap a:hover{color:var(--teal-deep)}
+.vlink{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;text-decoration:none;
+  color:var(--teal-deep);background:var(--teal-wash);border:1px solid color-mix(in srgb,var(--teal) 35%,transparent);
+  border-radius:999px;padding:6px 12px 6px 9px;margin:2px 0 16px}
+.vlink .tri{flex:none;width:18px;height:18px;border-radius:5px;background:#ff0033;display:grid;place-items:center}
+.vlink .tri::after{content:"";border-left:7px solid #fff;border-top:4.5px solid transparent;border-bottom:4.5px solid transparent;margin-left:2px}
+.vlink:hover{border-color:var(--teal)}
+.contact{display:grid;gap:10px}
+.contact a.row{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);
+  padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.contact a.row:hover{border-color:var(--teal)}
+.contact .ic{flex:none;width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-size:17px;color:#fff}
+.contact b{font-weight:600;display:block}
+.contact small{color:var(--ink-soft);font-size:13px}
 
 .edit{font-family:"JetBrains Mono";font-size:11.5px;color:var(--amber);background:color-mix(in srgb,var(--amber) 14%,transparent);
   border:1px dashed color-mix(in srgb,var(--amber) 50%,var(--line));border-radius:6px;padding:2px 7px;white-space:nowrap}
@@ -245,6 +264,7 @@ footer .brand{justify-content:center;margin-bottom:8px;font-size:16px}
         <a href="#prompt">Thư viện Prompt</a>
         <a href="#thenho">Nạp nhạc &amp; ảnh</a>
         <a href="#reset">Khôi phục gốc</a>
+        <a href="#hotro">Video hướng dẫn</a>
       </nav>
     </div>
   </header>
@@ -262,7 +282,7 @@ footer .brand{justify-content:center;margin-bottom:8px;font-size:16px}
       <a href="#easter"><span class="n">07</span> Easter Egg thẻ nhớ</a>
       <a href="#reset"><span class="n">08</span> Khôi phục gốc &amp; đổi WiFi</a>
       <a href="#suco"><span class="n">09</span> Xử lý sự cố</a>
-      <a href="#hotro"><span class="n">10</span> Hỗ trợ &amp; video</a>
+      <a href="#hotro"><span class="n">10</span> Video hướng dẫn &amp; liên hệ</a>
     </nav>
   </details>
   </aside>
@@ -273,6 +293,7 @@ footer .brand{justify-content:center;margin-bottom:8px;font-size:16px}
   <section class="sec" id="batdau">
     <h2><span class="tag">01</span> Bắt đầu nhanh</h2>
     <p class="sub">Bốn bước để BMO nói chuyện được với bạn lần đầu.</p>
+    <a class="vlink" href="#hotro"><span class="tri"></span>Xem video: Kết nối mạng &amp; cấu hình lần đầu</a>
     <ol class="steps">
       <li><b>Sạc pin.</b> Cắm cáp USB Type-C, sạc cho tới khi đầy.
         <small>Có thể vừa sạc vừa dùng.</small></li>
@@ -290,6 +311,7 @@ footer .brand{justify-content:center;margin-bottom:8px;font-size:16px}
   <section class="sec" id="danhthuc">
     <h2><span class="tag">02</span> Đánh thức &amp; trò chuyện</h2>
     <p class="sub">Hai cách bắt đầu một cuộc trò chuyện.</p>
+    <a class="vlink" href="#hotro"><span class="tri"></span>Xem video: Cách sử dụng BMO cơ bản</a>
     <div class="tiles">
       <div class="tile"><b>🗣️ Gọi tên</b><small>Nói <b>"Hey BMO"</b> (hey bee moh) rồi nói tiếp. Nói xong BMO tự trả lời và nghe tiếp.</small></div>
       <div class="tile"><b>👆 Bấm nút</b><small>Bấm một nút mũi tên trên thân máy để bật nghe ngay, không cần gọi tên.</small></div>
@@ -870,18 +892,26 @@ Khi ai hỏi về sinh nhật, hãy chúc thật vui và hát một câu.</div>
 
   <!-- 10 -->
   <section class="sec" id="hotro">
-    <h2><span class="tag">10</span> Hỗ trợ &amp; video hướng dẫn</h2>
-    <p class="sub">Xem video làm theo từng bước, hoặc liên hệ khi cần trợ giúp.</p>
+    <h2><span class="tag">10</span> Video hướng dẫn &amp; liên hệ</h2>
+    <p class="sub">Hai video ngắn làm theo từng bước. Bấm phát ngay tại đây, hoặc bấm tiêu đề để mở trên YouTube.</p>
     <div class="vids">
-      <a class="vid" href="#" target="_blank" rel="noopener"><div class="thumb"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><div class="vcap">Cài đặt lần đầu<small><span class="edit">[Dán link video]</span></small></div></a>
-      <a class="vid" href="#" target="_blank" rel="noopener"><div class="thumb"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><div class="vcap">Nạp nhạc &amp; ảnh vào thẻ<small><span class="edit">[Dán link video]</span></small></div></a>
-      <a class="vid" href="#" target="_blank" rel="noopener"><div class="thumb"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><div class="vcap">Đổi tính cách &amp; học ngoại ngữ<small><span class="edit">[Dán link video]</span></small></div></a>
+      <div class="vid">
+        <div class="frame wide"><iframe src="https://www.youtube.com/embed/3SCyWIaw_qA" title="Cách setup kết nối BMO" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+        <div class="vcap"><span class="yt"></span><div><a href="https://youtu.be/3SCyWIaw_qA" target="_blank" rel="noopener">Kết nối mạng &amp; cấu hình lần đầu</a>
+          <small>Làm theo video này ngay khi vừa mở hộp: kết nối WiFi, ghép máy với xiaozhi.me và gọi BMO lần đầu.</small></div></div>
+      </div>
+      <div class="vid">
+        <div class="frame tall"><iframe src="https://www.youtube.com/embed/kBHltU81ehI" title="Hướng dẫn sử dụng cơ bản BMO" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+        <div class="vcap"><span class="yt"></span><div><a href="https://youtube.com/shorts/kBHltU81ehI" target="_blank" rel="noopener">Cách sử dụng BMO cơ bản</a>
+          <small>Đánh thức, trò chuyện, dùng nút bấm và cử chỉ chạm — những thao tác hằng ngày với BMO.</small></div></div>
+      </div>
     </div>
-    <div class="card pad" style="margin-top:16px">
-      <h3 style="margin-top:0">Liên hệ</h3>
-      <p style="margin-bottom:6px">Hotline / Zalo: <b><span class="edit">[Điền số điện thoại]</span></b></p>
-      <p style="margin-bottom:6px">Fanpage: <b><span class="edit">[Điền link Facebook]</span></b></p>
-      <p style="margin-bottom:0">Cấu hình đám mây: <a href="https://xiaozhi.me" target="_blank" rel="noopener">xiaozhi.me</a></p>
+
+    <h3>Liên hệ hỗ trợ</h3>
+    <div class="card pad contact">
+      <a class="row" href="tel:0349864442"><span class="ic" style="background:var(--green)">📞</span><span><b>0349 864 442</b><small>Gọi hoặc nhắn Zalo khi cần trợ giúp</small></span></a>
+      <a class="row" href="https://www.facebook.com/profile.php?id=61577976764722" target="_blank" rel="noopener"><span class="ic" style="background:var(--blue)">f</span><span><b>Fanpage Facebook</b><small>Nhắn tin, xem thêm video và cập nhật mới</small></span></a>
+      <a class="row" href="https://xiaozhi.me" target="_blank" rel="noopener"><span class="ic" style="background:var(--teal)">☁</span><span><b>xiaozhi.me</b><small>Trang cấu hình tính cách, giọng nói và ngôn ngữ của BMO</small></span></a>
     </div>
   </section>
 
@@ -890,7 +920,7 @@ Khi ai hỏi về sinh nhật, hãy chúc thật vui và hát một câu.</div>
 
 <footer>
   <div class="brand" style="display:inline-flex"><span class="mk"><i></i></span>Sổ tay BMO</div>
-  <div>Hướng dẫn sử dụng · Phiên bản 2.0.5 · <span class="edit">[Tên shop của bạn]</span></div>
+  <div>Hướng dẫn sử dụng · Phiên bản 2.0.5 · Enbra</div>
 </footer>
 
 <div class="toast" id="toast">Đã sao chép ✓</div>
